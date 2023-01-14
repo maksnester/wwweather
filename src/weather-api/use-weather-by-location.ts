@@ -34,7 +34,11 @@ const fetchWeatherByLocationQuery = async (locationQuery: string) => {
 };
 
 export const useWeatherByLocationQuery = (locationQuery: string) => {
-  return useQuery([locationQuery], () =>
-    fetchWeatherByLocationQuery(locationQuery)
+  return useQuery(
+    [locationQuery],
+    () => fetchWeatherByLocationQuery(locationQuery),
+    {
+      staleTime: 1000 * 60,
+    }
   );
 };
