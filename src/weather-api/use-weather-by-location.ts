@@ -4,7 +4,6 @@ import { LocationDTO, WeatherDTO } from "./types";
 
 const fetchWeatherByLocationQuery = async (locationQuery: string) => {
   const appId = import.meta.env.VITE_API_KEY;
-  console.log("appid", appId, import.meta.env);
 
   const locationResponse = await axios.get<LocationDTO[]>(
     `https://api.openweathermap.org/geo/1.0/direct`,

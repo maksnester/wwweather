@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalstorage";
 
 const STORAGE_KEY = "locations";
@@ -10,13 +10,42 @@ export const useLocationsList = (defaultLocations: string[] = []) => {
     defaultLocations
   );
 
-  return {
-    locations,
-    addLocation: useCallback((newLocation: string) => {
+  useEffect(() => {
+    if (locations && !locations.length) {
+      setLocations(defaultLocations);
+    }
+  }, []);
+
+  const addLocation = useCallback(
+    (newLocation: string) => {
       const newLocationLowercase = newLocation.toLowerCase();
       if (!locations.includes(newLocationLowercase)) {
-        setLocations(locations.concat(newLocationLowercase));
+        setLocations([newLocationLowercase].concat(locations));
       }
-    }, locations),
+    },
+    [locations]
+  );
+
+  const removeLocation = useCallback(
+    (locationToRemove: string) => {
+      const locationToRemoveLowercase = locationToRemove.toLowerCase();
+      const foundLocationIndex = locations.findIndex(
+        (location) => location === locationToRemoveLowercase
+      );
+      if (foundLocationIndex > -1) {
+        setLocations(
+          locations
+            .slice(0, foundLocationIndex)
+            .concat(locations.slice(foundLocationIndex + 1))
+        );
+      }
+    },
+    [locations]
+  );
+
+  return {
+    locations,
+    addLocation,
+    removeLocation,
   };
 };

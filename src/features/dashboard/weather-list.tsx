@@ -1,15 +1,21 @@
+import "./weather-list.css";
 import { WeatherListItem } from "./weather-list-item";
 
 type Props = {
   locations: string[];
+  onRemoveLocation: (location: string) => void;
 };
 
-export function WeatherList({ locations }: Props) {
+export function WeatherList({ locations, onRemoveLocation }: Props) {
   return (
-    <>
+    <div className="weather-list">
       {locations.map((location) => (
-        <WeatherListItem key={location} location={location} />
+        <WeatherListItem
+          key={location}
+          location={location}
+          onRemoveLocation={onRemoveLocation}
+        />
       ))}
-    </>
+    </div>
   );
 }

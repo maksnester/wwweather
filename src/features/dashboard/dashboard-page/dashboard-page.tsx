@@ -6,7 +6,10 @@ import { useLocationsList } from "./useLocationsList";
  * Main page that displays all the locations that users added to track weather for
  */
 export function DashboardPage() {
-  const { locations, addLocation } = useLocationsList(["london", "berlin"]);
+  const { locations, addLocation, removeLocation } = useLocationsList([
+    "london",
+    "berlin",
+  ]);
   const [newLocation, setNewLocation] = useState("");
 
   const handleNewLocationSubmit = (e: FormEvent) => {
@@ -24,7 +27,10 @@ export function DashboardPage() {
           placeholder="Add new location"
         />
       </form>
-      <WeatherList locations={locations}></WeatherList>
+      <WeatherList
+        locations={locations}
+        onRemoveLocation={removeLocation}
+      ></WeatherList>
     </div>
   );
 }
