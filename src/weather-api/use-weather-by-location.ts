@@ -1,12 +1,41 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { LocationDTO, WeatherDTO } from "./types";
 
-const fetchWeatherByLocation = (location: string) => {
-  return Promise.resolve({
-    t: 123,
-  });
+const fetchWeatherByLocationQuery = async (locationQuery: string) => {
+  const appId = import.meta.env.VITE_API_KEY;
+  console.log("appid", appId, import.meta.env);
+
+  const locationResponse = await axios.get<LocationDTO[]>(
+    `https://api.openweathermap.org/geo/1.0/direct`,
+    {
+      params: {
+        // City name, state code (only for the US) and country code divided by comma. Please use ISO 3166 country codes.
+        q: locationQuery,
+        appId,
+        limit: 1,
+      },
+    }
+  );
+
+  const { lat, lon } = locationResponse.data[0];
+
+  const weatherResponse = await axios.get<WeatherDTO>(
+    `https://api.openweathermap.org/data/2.5/weather`,
+    {
+      params: {
+        lat,
+        lon,
+        appId,
+      },
+    }
+  );
+
+  return weatherResponse.data;
 };
 
-export const useWeatherByLocation = (location: string) => {
-  return useQuery([location], () => fetchWeatherByLocation(location));
+export const useWeatherByLocationQuery = (locationQuery: string) => {
+  return useQuery([locationQuery], () =>
+    fetchWeatherByLocationQuery(locationQuery)
+  );
 };
