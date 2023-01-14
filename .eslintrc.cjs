@@ -20,6 +20,9 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+
+        // should be in dev-only config rule
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
