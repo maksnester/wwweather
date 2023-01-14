@@ -1,0 +1,15 @@
+.location-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.back-link {
+  position: absolute;
+  left: 0;
+}
+
+.location-title {
+  text-transform: capitalize;
+}

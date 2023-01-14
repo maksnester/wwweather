@@ -1,5 +1,6 @@
 import { useWeatherByLocationQuery } from "../../weather-api";
 import "./weather-list-item.css";
+import { Link } from "react-router-dom";
 
 type Props = {
   location: string;
@@ -15,7 +16,7 @@ export function WeatherListItem({ location, onRemoveLocation }: Props) {
   return (
     <div className="weather-list-item">
       <p>
-        Location: <a href={`/${location}`}>{location}</a>
+        Location: <Link to={`/${location}`}>{location}</Link>
       </p>
       <button type="button" onClick={() => onRemoveLocation(location)}>
         Remove

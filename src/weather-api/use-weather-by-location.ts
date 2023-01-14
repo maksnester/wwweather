@@ -26,6 +26,7 @@ const fetchWeatherByLocationQuery = async (locationQuery: string) => {
         lat,
         lon,
         appId,
+        units: "metric",
       },
     }
   );
