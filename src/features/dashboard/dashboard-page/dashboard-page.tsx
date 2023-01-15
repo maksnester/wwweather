@@ -1,11 +1,14 @@
 import { WeatherList } from "../weather-list";
 import { FormEvent, useState } from "react";
 import { useLocationsList } from "./useLocationsList";
+import { usePageTitle } from "../../../hooks/usePageTitle";
 
 /**
  * Main page that displays all the locations that users added to track weather for
  */
 export function DashboardPage() {
+  usePageTitle("Weather app");
+
   const { locations, addLocation, removeLocation } = useLocationsList([
     "london",
     "berlin",

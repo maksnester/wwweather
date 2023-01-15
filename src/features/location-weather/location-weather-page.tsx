@@ -3,6 +3,7 @@ import "./location-weather-page.css";
 import { useWeatherByLocationQuery } from "../../weather-api";
 import { getTimeString } from "./utils";
 import { getMessageFromError } from "../../utils/getMessageFromError";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 /**
  * Displays weather details for one selected location
@@ -14,6 +15,11 @@ export const LocationWeatherPage = () => {
       "LocationWeatherPage should only be used with /:location route"
     );
   }
+
+  const locationUpperCased = location[0]
+    .toUpperCase()
+    .concat(location.slice(1));
+  usePageTitle(`${locationUpperCased} weather`);
 
   const { data, isLoading, error } = useWeatherByLocationQuery(location);
 

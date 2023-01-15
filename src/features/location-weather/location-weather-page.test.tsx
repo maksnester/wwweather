@@ -25,6 +25,7 @@ describe("location-weather-page", () => {
     });
 
     expect(screen.getByRole("heading", "khabarovsk")).toBeInTheDocument();
+    expect(document.title).toEqual("Khabarovsk weather");
 
     expect(screen.getByTestId("weather-type")).toHaveTextContent("Clear");
     expect(screen.getByTestId("temperature")).toHaveTextContent("-24");
