@@ -6,15 +6,23 @@ type CustomOptions = Omit<RenderOptions, "wrapper"> & {
   // add things as needed
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
 export const render = (ui: ReactElement, options?: CustomOptions) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+    // react-query logs errors by default
+    logger: {
+      /* eslint-disable @typescript-eslint/no-empty-function */
+      log: () => {},
+      warn: () => {},
+      error: () => {},
+      /* eslint-enable @typescript-eslint/no-empty-function */
+    },
+  });
+
   const AllProviders = ({ children }: PropsWithChildren): ReactElement => {
     return (
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

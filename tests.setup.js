@@ -1,6 +1,6 @@
-import { server } from "./src/mocks/server";
+import { afterAll, afterEach, beforeEach, beforeAll, expect } from "vitest";
+import { server } from "./test-utils/mocks/server";
 
-import { expect, afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 import matchers from "@testing-library/jest-dom/matchers";
 
@@ -21,11 +21,19 @@ afterEach(() => {
 // --------------------------------
 
 // Establish API mocking before all tests.
-beforeAll(() => server.listen());
+beforeAll(() => {
+  server.listen({
+    onUnhandledRequest: "error",
+  });
+});
 
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.
-afterEach(() => server.resetHandlers());
+beforeEach(() => {
+  server.resetHandlers();
+});
 
 // Clean up after the tests are finished.
-afterAll(() => server.close());
+afterAll(() => {
+  server.close();
+});
