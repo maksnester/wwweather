@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import "./location-weather-page.css";
 import { useWeatherByLocationQuery } from "../../weather-api";
 import { getTimeString } from "./utils";
+import { getMessageFromError } from "../../utils/getMessageFromError";
 
 /**
  * Displays weather details for one selected location
@@ -20,9 +21,6 @@ export const LocationWeatherPage = () => {
     return <div>Loading...</div>;
   }
 
-  const errorMessage =
-    (error instanceof Error && error.message) || "Something went wrong";
-
   const UNIT = "°C";
 
   return (
@@ -34,15 +32,17 @@ export const LocationWeatherPage = () => {
         <h1 className="location-title">{location}</h1>
       </header>
 
-      {error && <p>{errorMessage}</p>}
+      {error && <p>{getMessageFromError(error)}</p>}
 
       {data && (
         <main>
           <p>
-            {data.weather[0].main} ({data.weather[0].description})
+            <span data-testid="weather-type">{data.weather[0].main}</span> (
+            {data.weather[0].description})
           </p>
           <p>
-            {data.main.temp.toFixed(0)} {UNIT}
+            <span data-testid="temperature">{data.main.temp.toFixed(0)}</span>{" "}
+            {UNIT}
           </p>
           <p>
             Min: {data.main.temp_min.toFixed(0)} {UNIT}
@@ -50,8 +50,18 @@ export const LocationWeatherPage = () => {
           <p>
             Max: {data.main.temp_max.toFixed(0)} {UNIT}
           </p>
-          <p>Sunrise: {getTimeString(data.sys.sunrise, data.timezone)}</p>
-          <p>Sunset: {getTimeString(data.sys.sunset, data.timezone)}</p>
+          <p>
+            Sunrise:{" "}
+            <span data-testid="sunrise-time">
+              {getTimeString(data.sys.sunrise, data.timezone)}
+            </span>
+          </p>
+          <p>
+            Sunset:{" "}
+            <span data-testid="sunset-time">
+              {getTimeString(data.sys.sunset, data.timezone)}
+            </span>
+          </p>
           <p>Humidity: {data.main.humidity} %</p>
           <p>Visibility: {data.visibility} m</p>
         </main>

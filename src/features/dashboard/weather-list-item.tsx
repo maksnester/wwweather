@@ -1,6 +1,7 @@
 import { useWeatherByLocationQuery } from "../../weather-api";
 import "./weather-list-item.css";
 import { Link } from "react-router-dom";
+import { getMessageFromError } from "../../utils/getMessageFromError";
 
 type Props = {
   location: string;
@@ -9,8 +10,7 @@ type Props = {
 
 export function WeatherListItem({ location, onRemoveLocation }: Props) {
   const { data, error } = useWeatherByLocationQuery(location);
-  const errorMessage =
-    (error instanceof Error && error.message) || "Something went wrong";
+
   return (
     <div className="weather-list-item">
       <p>
@@ -20,7 +20,7 @@ export function WeatherListItem({ location, onRemoveLocation }: Props) {
         Remove
       </button>
       <>
-        {error && <p>{errorMessage}</p>}
+        {error && <p>{getMessageFromError(error)}</p>}
         {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
       </>
     </div>
