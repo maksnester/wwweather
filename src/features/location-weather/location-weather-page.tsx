@@ -15,17 +15,13 @@ export const LocationWeatherPage = () => {
   }
 
   const { data, isLoading, error } = useWeatherByLocationQuery(location);
-  if (error) {
-    throw error;
-  }
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (!data) {
-    return <div>No data found for this location.</div>;
-  }
+  const errorMessage =
+    (error instanceof Error && error.message) || "Something went wrong";
 
   const UNIT = "°C";
 
@@ -38,24 +34,28 @@ export const LocationWeatherPage = () => {
         <h1 className="location-title">{location}</h1>
       </header>
 
-      <main>
-        <p>
-          {data.weather[0].main} ({data.weather[0].description})
-        </p>
-        <p>
-          {data.main.temp.toFixed(0)} {UNIT}
-        </p>
-        <p>
-          Min: {data.main.temp_min.toFixed(0)} {UNIT}
-        </p>
-        <p>
-          Max: {data.main.temp_max.toFixed(0)} {UNIT}
-        </p>
-        <p>Sunrise: {getTimeString(data.sys.sunrise, data.timezone)}</p>
-        <p>Sunset: {getTimeString(data.sys.sunset, data.timezone)}</p>
-        <p>Humidity: {data.main.humidity} %</p>
-        <p>Visibility: {data.visibility} m</p>
-      </main>
+      {error && <p>{errorMessage}</p>}
+
+      {data && (
+        <main>
+          <p>
+            {data.weather[0].main} ({data.weather[0].description})
+          </p>
+          <p>
+            {data.main.temp.toFixed(0)} {UNIT}
+          </p>
+          <p>
+            Min: {data.main.temp_min.toFixed(0)} {UNIT}
+          </p>
+          <p>
+            Max: {data.main.temp_max.toFixed(0)} {UNIT}
+          </p>
+          <p>Sunrise: {getTimeString(data.sys.sunrise, data.timezone)}</p>
+          <p>Sunset: {getTimeString(data.sys.sunset, data.timezone)}</p>
+          <p>Humidity: {data.main.humidity} %</p>
+          <p>Visibility: {data.visibility} m</p>
+        </main>
+      )}
     </>
   );
 };

@@ -9,10 +9,8 @@ type Props = {
 
 export function WeatherListItem({ location, onRemoveLocation }: Props) {
   const { data, error } = useWeatherByLocationQuery(location);
-  if (error) {
-    throw error;
-  }
-
+  const errorMessage =
+    (error instanceof Error && error.message) || "Something went wrong";
   return (
     <div className="weather-list-item">
       <p>
@@ -21,7 +19,10 @@ export function WeatherListItem({ location, onRemoveLocation }: Props) {
       <button type="button" onClick={() => onRemoveLocation(location)}>
         Remove
       </button>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <>
+        {error && <p>{errorMessage}</p>}
+        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      </>
     </div>
   );
 }

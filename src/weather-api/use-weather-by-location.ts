@@ -17,6 +17,10 @@ const fetchWeatherByLocationQuery = async (locationQuery: string) => {
     }
   );
 
+  if (!locationResponse.data[0]) {
+    throw new Error(`Can't find any locations with name "${locationQuery}"`);
+  }
+
   const { lat, lon } = locationResponse.data[0];
 
   const weatherResponse = await axios.get<WeatherDTO>(
@@ -39,7 +43,8 @@ export const useWeatherByLocationQuery = (locationQuery: string) => {
     [locationQuery],
     () => fetchWeatherByLocationQuery(locationQuery),
     {
-      staleTime: 1000 * 60,
+      staleTime: 1000 * 60 * 5,
+      retry: false,
     }
   );
 };
