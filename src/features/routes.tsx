@@ -3,7 +3,7 @@ import { ErrorPage } from "./error-page";
 import { LocationWeatherPage } from "./location-weather";
 import { DashboardPage } from "./dashboard";
 
-const router = createBrowserRouter([
+export const routes = [
   {
     path: "/",
     element: <DashboardPage />,
@@ -13,7 +13,9 @@ const router = createBrowserRouter([
     path: "/:location",
     element: <LocationWeatherPage />,
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export function Routes() {
   return <RouterProvider router={router} />;
