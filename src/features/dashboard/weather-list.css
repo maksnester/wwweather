@@ -1,5 +1,17 @@
 .weather-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.weather-list__item {
+  min-width: 320px;
+}
+
+@media screen and (min-width: 700px) {
+  .weather-list {
+    flex-direction: row;
+    margin: auto;
+  }
 }

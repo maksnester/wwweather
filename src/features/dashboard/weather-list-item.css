@@ -1,10 +1,12 @@
 .weather-list-item {
+  position: relative;
   padding: 8px;
   border: 1px solid black;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 
   /* a tag overrides */
   text-decoration: none;
@@ -13,4 +15,34 @@
 
 .weather-list-item__location-title {
   text-transform: capitalize;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 185px;
+}
+
+.weather-list-item__temperature {
+  font-size: 24px;
+}
+
+.weather-list-item__error {
+  padding: 4px;
+  color: red;
+  border: 1px solid red;
+  margin: 4px 0;
+  flex-basis: 100%;
+}
+
+.weather-list-item__remove-button {
+  color: lightgray;
+  background-color: transparent;
+  margin: 0;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+}
+.weather-list-item__remove-button:hover {
+  color: grey;
 }

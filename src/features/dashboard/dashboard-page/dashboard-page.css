@@ -1,0 +1,9 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-page__location-input {
+  height: 24px;
+}

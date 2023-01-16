@@ -11,6 +11,7 @@ export function WeatherList({ locations, onRemoveLocation }: Props) {
     <div className="weather-list">
       {locations.map((location) => (
         <WeatherListItem
+          className="weather-list__item"
           key={location}
           location={location}
           onRemoveLocation={onRemoveLocation}
