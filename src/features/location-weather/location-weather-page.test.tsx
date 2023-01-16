@@ -24,6 +24,7 @@ describe("location-weather-page", () => {
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
     });
 
+    // @ts-ignore getByRole types don't have plain string, but it works
     expect(screen.getByRole("heading", "khabarovsk")).toBeInTheDocument();
     expect(document.title).toEqual("Khabarovsk weather");
 
@@ -55,6 +56,7 @@ describe("location-weather-page", () => {
     });
 
     expect(
+      // @ts-ignore getByRole types don't have plain string, but it works
       screen.getByRole("heading", "something-that-totally-makes-no-sense")
     ).toBeInTheDocument();
 
@@ -84,6 +86,7 @@ describe("location-weather-page", () => {
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
     });
 
+    // @ts-ignore getByRole types don't have plain string, but it works
     expect(screen.getByRole("heading", "tokyo")).toBeInTheDocument();
 
     expect(screen.getByText(/server goes brrrr/i)).toBeInTheDocument();
