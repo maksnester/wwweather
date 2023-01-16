@@ -11,18 +11,34 @@ type Props = {
 export function WeatherListItem({ location, onRemoveLocation }: Props) {
   const { data, error } = useWeatherByLocationQuery(location);
 
+  const UNIT = "°C";
+
   return (
-    <div className="weather-list-item">
-      <p>
-        Location: <Link to={`/${location}`}>{location}</Link>
-      </p>
-      <button type="button" onClick={() => onRemoveLocation(location)}>
+    <Link to={`/${location}`} className="weather-list-item">
+      <h2 className="weather-list-item__location-title">{location}</h2>
+
+      {!!data && (
+        <>
+          <span data-testid={`${location}-temperature`}>
+            {data.main.temp.toFixed(0)}
+          </span>
+          &nbsp;
+          {UNIT}
+        </>
+      )}
+
+      {!!error && <div>{getMessageFromError(error)}</div>}
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          onRemoveLocation(location);
+        }}
+        data-testid={`${location}-remove`}
+      >
         Remove
       </button>
-      <>
-        {error && <p>{getMessageFromError(error)}</p>}
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      </>
-    </div>
+    </Link>
   );
 }

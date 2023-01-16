@@ -47,7 +47,8 @@ export const LocationWeatherPage = () => {
             {data.weather[0].description})
           </p>
           <p>
-            <span data-testid="temperature">{data.main.temp.toFixed(0)}</span>{" "}
+            <span data-testid="temperature">{data.main.temp.toFixed(0)}</span>
+            &nbsp;
             {UNIT}
           </p>
           <p>

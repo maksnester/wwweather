@@ -1,21 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { LocationDTO, WeatherDTO } from "./types";
+import { CURRENT_WEATHER_API_URL, GEOCODING_API_URL } from "./constants";
 
 const fetchWeatherByLocationQuery = async (locationQuery: string) => {
   const appId = import.meta.env.VITE_API_KEY;
 
-  const locationResponse = await axios.get<LocationDTO[]>(
-    `https://api.openweathermap.org/geo/1.0/direct`,
-    {
-      params: {
-        // City name, state code (only for the US) and country code divided by comma. Please use ISO 3166 country codes.
-        q: locationQuery,
-        appId,
-        limit: 1,
-      },
-    }
-  );
+  const locationResponse = await axios.get<LocationDTO[]>(GEOCODING_API_URL, {
+    params: {
+      // City name, state code (only for the US) and country code divided by comma. Please use ISO 3166 country codes.
+      q: locationQuery,
+      appId,
+      limit: 1,
+    },
+  });
 
   if (!locationResponse.data[0]) {
     throw new Error(`Can't find any locations with name "${locationQuery}"`);
@@ -23,17 +21,14 @@ const fetchWeatherByLocationQuery = async (locationQuery: string) => {
 
   const { lat, lon } = locationResponse.data[0];
 
-  const weatherResponse = await axios.get<WeatherDTO>(
-    `https://api.openweathermap.org/data/2.5/weather`,
-    {
-      params: {
-        lat,
-        lon,
-        appId,
-        units: "metric",
-      },
-    }
-  );
+  const weatherResponse = await axios.get<WeatherDTO>(CURRENT_WEATHER_API_URL, {
+    params: {
+      lat,
+      lon,
+      appId,
+      units: "metric",
+    },
+  });
 
   return weatherResponse.data;
 };

@@ -1,8 +1,13 @@
-import { afterAll, afterEach, beforeEach, beforeAll, expect } from "vitest";
+import { afterAll, afterEach, beforeEach, beforeAll, expect, vi } from "vitest";
 import { server } from "./test-utils/mocks/server";
 
 import { cleanup } from "@testing-library/react";
 import matchers from "@testing-library/jest-dom/matchers";
+
+beforeEach(() => {
+  localStorage.clear();
+  vi.clearAllMocks();
+});
 
 // ----------------------
 // RTL related extensions

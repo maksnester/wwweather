@@ -1,0 +1,28 @@
+export const currentWeatherResBerlin = {
+  coord: { lon: 13.3889, lat: 52.517 },
+  weather: [{ id: 800, main: "Clear", description: "clear sky", icon: "01d" }],
+  base: "stations",
+  main: {
+    temp: 7.12,
+    feels_like: 3.72,
+    temp_min: 5.61,
+    temp_max: 8.34,
+    pressure: 979,
+    humidity: 64,
+  },
+  visibility: 10000,
+  wind: { speed: 5.66, deg: 140 },
+  clouds: { all: 0 },
+  dt: 1673876215,
+  sys: {
+    type: 2,
+    id: 2009543,
+    country: "DE",
+    sunrise: 1673852957,
+    sunset: 1673882543,
+  },
+  timezone: 3600,
+  id: 7576815,
+  name: "Alt-Kölln",
+  cod: 200,
+};

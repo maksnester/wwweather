@@ -1,0 +1,30 @@
+export const currentWeatherResLondon = {
+  coord: { lon: -0.1276, lat: 51.5073 },
+  weather: [
+    { id: 803, main: "Clouds", description: "broken clouds", icon: "04d" },
+  ],
+  base: "stations",
+  main: {
+    temp: 4.77,
+    feels_like: 0.33,
+    temp_min: 3.92,
+    temp_max: 5.56,
+    pressure: 985,
+    humidity: 83,
+  },
+  visibility: 10000,
+  wind: { speed: 6.69, deg: 290 },
+  clouds: { all: 75 },
+  dt: 1673876188,
+  sys: {
+    type: 2,
+    id: 2075535,
+    country: "GB",
+    sunrise: 1673855930,
+    sunset: 1673886059,
+  },
+  timezone: 0,
+  id: 2643743,
+  name: "London",
+  cod: 200,
+};

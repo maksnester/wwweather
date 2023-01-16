@@ -18,9 +18,9 @@ export const useLocationsList = (defaultLocations: string[] = []) => {
 
   const addLocation = useCallback(
     (newLocation: string) => {
-      const newLocationLowercase = newLocation.toLowerCase();
-      if (!locations.includes(newLocationLowercase)) {
-        setLocations([newLocationLowercase].concat(locations));
+      const newLocationFormatted = formatLocation(newLocation);
+      if (!locations.includes(newLocationFormatted)) {
+        setLocations([newLocationFormatted].concat(locations));
       }
     },
     [locations]
@@ -28,9 +28,9 @@ export const useLocationsList = (defaultLocations: string[] = []) => {
 
   const removeLocation = useCallback(
     (locationToRemove: string) => {
-      const locationToRemoveLowercase = locationToRemove.toLowerCase();
+      const locationToRemoveFormatted = formatLocation(locationToRemove);
       const foundLocationIndex = locations.findIndex(
-        (location) => location === locationToRemoveLowercase
+        (location) => location === locationToRemoveFormatted
       );
       if (foundLocationIndex > -1) {
         setLocations(
@@ -48,4 +48,8 @@ export const useLocationsList = (defaultLocations: string[] = []) => {
     addLocation,
     removeLocation,
   };
+};
+
+const formatLocation = (str: string) => {
+  return str.toLowerCase().trim();
 };

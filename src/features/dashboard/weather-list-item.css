@@ -1,4 +1,16 @@
 .weather-list-item {
   padding: 8px;
   border: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* a tag overrides */
+  text-decoration: none;
+  color: inherit;
+}
+
+.weather-list-item__location-title {
+  text-transform: capitalize;
 }

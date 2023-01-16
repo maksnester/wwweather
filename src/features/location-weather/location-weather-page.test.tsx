@@ -7,12 +7,22 @@ import { routes } from "../routes";
 
 import { rest } from "msw";
 import { server } from "../../../test-utils/mocks/server";
-import { geoDirectHandler } from "../../../test-utils/mocks/geo-direct-handler";
-import { dataWeatherHandler } from "../../../test-utils/mocks/data-weather-handler";
+import {
+  CURRENT_WEATHER_API_URL,
+  GEOCODING_API_URL,
+} from "../../weather-api/constants";
+import { currentWeatherResKhabarovsk } from "../../../test-utils/mocks/current-weather-res-khabarovsk";
+
+const currentWeatherHandlerKhabarovsk = rest.get(
+  CURRENT_WEATHER_API_URL,
+  (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(currentWeatherResKhabarovsk));
+  }
+);
 
 describe("location-weather-page", () => {
   it("renders weather details for Khabarovsk city", async () => {
-    server.use(geoDirectHandler, dataWeatherHandler);
+    server.use(currentWeatherHandlerKhabarovsk);
 
     const router = createMemoryRouter(routes, {
       initialEntries: ["/khabarovsk"],
@@ -36,13 +46,10 @@ describe("location-weather-page", () => {
 
   it("renders an error message for unknown location", async () => {
     server.use(
-      rest.get(
-        "https://api.openweathermap.org/geo/1.0/direct",
-        (req, res, ctx) => {
-          // actual API reacts the same way
-          return res(ctx.status(200), ctx.json([]));
-        }
-      )
+      rest.get(GEOCODING_API_URL, (req, res, ctx) => {
+        // actual API reacts the same way
+        return res(ctx.status(200), ctx.json([]));
+      })
     );
 
     const router = createMemoryRouter(routes, {
@@ -67,13 +74,9 @@ describe("location-weather-page", () => {
 
   it("renders an error message for server error", async () => {
     server.use(
-      rest.get(
-        "https://api.openweathermap.org/geo/1.0/direct",
-        (req, res, ctx) => {
-          // actual API reacts the same way
-          return res(ctx.status(500), ctx.json("server goes brrrr"));
-        }
-      )
+      rest.get(GEOCODING_API_URL, (req, res, ctx) => {
+        return res(ctx.status(500), ctx.json("server goes brrrr"));
+      })
     );
 
     const router = createMemoryRouter(routes, {
