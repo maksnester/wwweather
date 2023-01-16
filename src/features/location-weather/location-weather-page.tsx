@@ -2,8 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import "./location-weather-page.css";
 import { useWeatherByLocationQuery } from "../../weather-api";
 import { getTimeString } from "./utils";
-import { getMessageFromError } from "../../utils/getMessageFromError";
-import { usePageTitle } from "../../hooks/usePageTitle";
+import { getMessageFromError } from "../../utils/get-message-from-error";
+import { usePageTitle } from "../../hooks/use-page-title";
 
 /**
  * Displays weather details for one selected location

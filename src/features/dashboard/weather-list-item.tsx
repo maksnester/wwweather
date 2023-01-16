@@ -1,7 +1,7 @@
 import { useWeatherByLocationQuery } from "../../weather-api";
 import "./weather-list-item.css";
 import { Link } from "react-router-dom";
-import { getMessageFromError } from "../../utils/getMessageFromError";
+import { getMessageFromError } from "../../utils/get-message-from-error";
 
 type Props = {
   className?: string;

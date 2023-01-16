@@ -1,7 +1,7 @@
 import { WeatherList } from "../weather-list";
 import { FormEvent, useState } from "react";
-import { useLocationsList } from "./useLocationsList";
-import { usePageTitle } from "../../../hooks/usePageTitle";
+import { useLocationsList } from "./use-locations-list";
+import { usePageTitle } from "../../../hooks/use-page-title";
 
 import "./dashboard-page.css";
 

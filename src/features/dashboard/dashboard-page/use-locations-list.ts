@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useLocalStorage } from "../../../hooks/useLocalstorage";
+import { useLocalStorage } from "../../../hooks/use-local-storage";
 
 const STORAGE_KEY = "locations";
 
