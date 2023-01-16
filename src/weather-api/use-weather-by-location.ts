@@ -4,7 +4,7 @@ import { LocationDTO, WeatherDTO } from "./types";
 import { CURRENT_WEATHER_API_URL, GEOCODING_API_URL } from "./constants";
 
 const fetchWeatherByLocationQuery = async (locationQuery: string) => {
-  const appId = import.meta.env.VITE_API_KEY;
+  const appId = "84308299a66a5688a65109c2c821b195";
 
   const locationResponse = await axios.get<LocationDTO[]>(GEOCODING_API_URL, {
     params: {
