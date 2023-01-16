@@ -3,7 +3,7 @@ import { screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import { render } from "../../../test-utils/render";
-import { routes } from "../routes";
+import { routes } from "../../routes";
 
 import { rest } from "msw";
 import { server } from "../../../test-utils/mocks/server";

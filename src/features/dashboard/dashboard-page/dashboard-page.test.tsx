@@ -4,7 +4,7 @@ import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { server } from "../../../../test-utils/mocks/server";
-import { routes } from "../../routes";
+import { routes } from "../../../routes";
 import { render } from "../../../../test-utils/render";
 
 import {

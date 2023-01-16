@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ErrorPage } from "./error-page";
-import { LocationWeatherPage } from "./location-weather";
-import { DashboardPage } from "./dashboard";
+import { ErrorPage } from "./features/error-page";
+import { LocationWeatherPage } from "./features/location-weather";
+import { DashboardPage } from "./features/dashboard";
 
 export const routes = [
   {
